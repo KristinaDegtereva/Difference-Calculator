@@ -1,8 +1,5 @@
 {
   "name": "@hexlet/code",
-  "jest": {
-    "verbose": true
-  },
   "version": "1.0.0",
   "type": "module",
   "description": "Second project",
@@ -11,7 +8,7 @@
   },
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "npx jest"
   },
   "author": "",
   "license": "ISC",
