@@ -28,7 +28,7 @@ const genfiff = (filepath1, filepath2) => {
         result.push(`  - ${key}:${data1[key]}`);
         result.push(`  + ${key}:${data2[key]}`); //  есть в двух разные значения, пушим оба
       }
-    } else if (!Object.hasOwn(data2, key)) { // удален
+    } else { // удален
       result.push(`  - ${key}:${data1[key]}`);
     }
     return result;
