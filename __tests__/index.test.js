@@ -3,11 +3,11 @@ import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import gendiff from '../src/index.js';
 import getParsedData from '../src/parser.js';
+import makeLines from '../src/stylish.js';
+// import buildTree from '../src/buildTree.js';
 
 const __filename = fileURLToPath(import.meta.url);
-// console.log(__filename);
 const __dirname = dirname(__filename);
-// console.log(__dirname);
 
 const getFixturePath = (filename) => path.join(__dirname, '..', '__fixtures__', filename);
 const readFile = (filename) => fs.readFileSync(getFixturePath(filename), 'utf-8');
@@ -33,3 +33,37 @@ test('gendiff', async () => {
 test('getParsedData', () => {
   expect(() => { getParsedData('data', '.yamsl'); }).toThrow();
 });
+
+test('makeLines', () => {
+  expect(makeLines('text')).toEqual(`{\n  ${'-text'}\n}`);
+  const tree = [
+    {
+      key: 'common',
+      children: [
+        {
+          key: 'follow',
+          value: false,
+          type: 'new',
+        },
+      ],
+      type: 'nested',
+    },
+  ];
+  expect(() => { makeLines(tree); }).toThrow();
+});
+
+// test('buildTree', async () => {
+//   const data1 = {
+//     host: 'hexlet.io',
+//     timeout: 50,
+//     proxy: '123.234.53.22',
+//     follow: false,
+//   };
+//   const data2 = {
+//     timeout: 20,
+//     verbose: true,
+//     host: 'hexlet.io',
+//   };
+//   const text = await readFile('buildTree_test.txt');
+//   expect((buildTree(data1, data2))).toEqual((text));
+// });
