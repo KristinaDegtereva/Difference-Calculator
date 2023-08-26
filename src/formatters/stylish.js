@@ -3,7 +3,7 @@ import _ from 'lodash';
 const replacer = ' ';
 const doubleSpace = '  ';
 
-const getSpaces = (depth, spacesCount = 4) => replacer.repeat(depth * spacesCount).slice(0, -2);
+const getSpaces = (depth, spacesCount = 4) => replacer.repeat(depth * spacesCount - 2);
 
 const stringify = (value, depth) => {
   if (!_.isObject(value)) {
