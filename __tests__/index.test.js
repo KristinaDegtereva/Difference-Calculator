@@ -70,6 +70,7 @@ test('getFormat', () => {
     },
   ];
   expect(() => { getFormat(tree, 'table'); }).toThrow();
+  expect(getFormat(tree, 'json')).toEqual(JSON.stringify(tree));
 });
 
 test('getPlain', () => {
