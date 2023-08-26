@@ -3,8 +3,9 @@ import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import gendiff from '../src/index.js';
 import getParsedData from '../src/parser.js';
-import makeLines from '../src/stylish.js';
-// import buildTree from '../src/buildTree.js';
+import makeLines from '../src/formatters/stylish.js';
+import getFormat from '../src/formatters/index.js';
+import getPlain from '../src/formatters/plain.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -13,21 +14,29 @@ const getFixturePath = (filename) => path.join(__dirname, '..', '__fixtures__', 
 const readFile = (filename) => fs.readFileSync(getFixturePath(filename), 'utf-8');
 
 test('gendiff', async () => {
-  const text = await readFile('json_test.txt');
-  const diff = gendiff('./__fixtures__/file1.json', './__fixtures__/file2.json');
-  expect(diff).toEqual(text);
-});
+  const jsonStylishText = await readFile('json_stylish_test.txt');
+  const diffJson = gendiff('./__fixtures__/file1.json', './__fixtures__/file2.json', 'stylish');
+  expect(diffJson).toEqual(jsonStylishText);
 
-test('gendiff', async () => {
-  const text = await readFile('yml_test.txt');
-  const diff = gendiff('./__fixtures__/file1.yml', './__fixtures__/file2.yml');
-  expect(diff).toEqual(text);
-});
+  const ymlStylishText = await readFile('yml_stylish_test.txt');
+  const diffYml = gendiff('./__fixtures__/file1.yml', './__fixtures__/file2.yml', 'stylish');
+  expect(diffYml).toEqual(ymlStylishText);
 
-test('gendiff', async () => {
-  const text = await readFile('yml_test.txt');
-  const diff = gendiff('./__fixtures__/file1.yaml', './__fixtures__/file2.yaml');
-  expect(diff).toEqual(text);
+  const yamlStylishText = await readFile('yaml_stylish_test.txt');
+  const diffYaml = gendiff('./__fixtures__/file1.yaml', './__fixtures__/file2.yaml', 'stylish');
+  expect(diffYaml).toEqual(yamlStylishText);
+
+  const jsonPlainText = await readFile('json_plain_test.txt');
+  const diffJson1 = gendiff('./__fixtures__/file1.json', './__fixtures__/file2.json', 'plain');
+  expect(diffJson1).toEqual(jsonPlainText);
+
+  const ymlPlainText = await readFile('yml_plain_test.txt');
+  const diffYml1 = gendiff('./__fixtures__/file1.yml', './__fixtures__/file2.yml', 'plain');
+  expect(diffYml1).toEqual(ymlPlainText);
+
+  const yamlPlainText = await readFile('yaml_plain_test.txt');
+  const diffYaml1 = gendiff('./__fixtures__/file1.yaml', './__fixtures__/file2.yaml', 'plain');
+  expect(diffYaml1).toEqual(yamlPlainText);
 });
 
 test('getParsedData', () => {
@@ -52,18 +61,26 @@ test('makeLines', () => {
   expect(() => { makeLines(tree); }).toThrow();
 });
 
-// test('buildTree', async () => {
-//   const data1 = {
-//     host: 'hexlet.io',
-//     timeout: 50,
-//     proxy: '123.234.53.22',
-//     follow: false,
-//   };
-//   const data2 = {
-//     timeout: 20,
-//     verbose: true,
-//     host: 'hexlet.io',
-//   };
-//   const text = await readFile('buildTree_test.txt');
-//   expect((buildTree(data1, data2))).toEqual((text));
-// });
+test('getFormat', () => {
+  const tree = [
+    {
+      key: 'follow',
+      value: false,
+      type: 'new',
+    },
+  ];
+  expect(() => { getFormat(tree, 'table'); }).toThrow();
+});
+
+test('getPlain', () => {
+  expect(getPlain('text')).toEqual('text');
+
+  const tree = [
+    {
+      key: 'follow',
+      value: false,
+      type: 'new',
+    },
+  ];
+  expect(() => { getPlain(tree, 'table'); }).toThrow();
+});
