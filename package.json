@@ -2,15 +2,15 @@
   "name": "@hexlet/code",
   "version": "1.0.0",
   "type": "module",
-  "description": "Second project",
+  "description": "Difference Calculator is a program that calculates and shows difference between two data structures.",
   "bin": {
     "gendiff": "bin/gendiff.js"
   },
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
     "test": "npx jest --bail"
   },
-  "author": "",
+  "author": "Kristina Degtereva",
   "license": "ISC",
   "devDependencies": {
     "eslint": "^8.47.0",
