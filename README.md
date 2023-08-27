@@ -10,10 +10,10 @@
 Difference Calculator is a program that calculates and shows difference between two data structures.
 
 ### Utility Features:
-<ol>
-<li>Support for various formats: yaml, json</li>
-<li>Generating a report in plain text, stylish text in json format</li>
-</ol>
+```
+Support for various formats: yaml, json
+Generating a report in plain text, stylish text in json format
+```
 
 ### Installation
 ```
