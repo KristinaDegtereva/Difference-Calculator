@@ -10,8 +10,10 @@
 Difference Calculator is a program that calculates and shows difference between two data structures.
 
 ### Utility Features:
-Support for various formats: yaml, json
-Generating a report in plain text, stylish text in json format
+<ol>
+<li>Support for various formats: yaml, json</li>
+<li>Generating a report in plain text, stylish text in json format</li>
+</ol>
 
 ### Installation
 ```
@@ -31,5 +33,3 @@ $ npm link
 
 #### Compare of two YAML and YAML files in format 'json'
 <a href="https://asciinema.org/a/4QtkizV7Ha85QQLqVVGr9Zl2t" target="_blank"><img src="https://asciinema.org/a/4QtkizV7Ha85QQLqVVGr9Zl2t.svg" /></a>
-
-
