@@ -23,13 +23,13 @@ $ npm link
 ```
 ### Asciinema
 #### Background information about the utility
-<a href="https://asciinema.org/a/Qlp1s9mcHWHuYX3rWFSrYEyap" target="_blank"><img src="https://asciinema.org/a/Qlp1s9mcHWHuYX3rWFSrYEyap.svg" /></a>
+[![asciicast](https://asciinema.org/a/Qlp1s9mcHWHuYX3rWFSrYEyap.svg)](https://asciinema.org/a/Qlp1s9mcHWHuYX3rWFSrYEyap)
 
 #### Compare of two JSON and YAML files in format 'stylish' (default format)
-<a href="https://asciinema.org/a/jHrXHViAecNkPR8oNBcr4Vv0v" target="_blank"><img src="https://asciinema.org/a/jHrXHViAecNkPR8oNBcr4Vv0v.svg" /></a>
+[![asciicast](https://asciinema.org/a/jHrXHViAecNkPR8oNBcr4Vv0v.svg)](https://asciinema.org/a/jHrXHViAecNkPR8oNBcr4Vv0v)
 
 #### Compare of two JSON and JSON files in format 'plain'
-<a href="https://asciinema.org/a/PSpmmZXNF3fZWqmJYJZ0gZEn7" target="_blank"><img src="https://asciinema.org/a/PSpmmZXNF3fZWqmJYJZ0gZEn7.svg" /></a>
+[![asciicast](https://asciinema.org/a/PSpmmZXNF3fZWqmJYJZ0gZEn7.svg)](https://asciinema.org/a/PSpmmZXNF3fZWqmJYJZ0gZEn7)
 
 #### Compare of two YAML and YAML files in format 'json'
-<a href="https://asciinema.org/a/4QtkizV7Ha85QQLqVVGr9Zl2t" target="_blank"><img src="https://asciinema.org/a/4QtkizV7Ha85QQLqVVGr9Zl2t.svg" /></a>
+[![asciicast](https://asciinema.org/a/4QtkizV7Ha85QQLqVVGr9Zl2t.svg)](https://asciinema.org/a/4QtkizV7Ha85QQLqVVGr9Zl2t)

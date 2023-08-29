@@ -13,30 +13,39 @@ const __dirname = dirname(__filename);
 const getFixturePath = (filename) => path.join(__dirname, '..', '__fixtures__', filename);
 const readFile = (filename) => fs.readFileSync(getFixturePath(filename), 'utf-8');
 
-test('gendiff', async () => {
-  const jsonStylishText = await readFile('json_stylish_test.txt');
-  const diffJson = gendiff('./__fixtures__/file1.json', './__fixtures__/file2.json', 'stylish');
-  expect(diffJson).toEqual(jsonStylishText);
+describe('gendiff', () => {
+  const cases = [
+    {
+      file1: 'file1.json', file2: 'file2.json', formatter: 'stylish', expected: 'json_stylish_test.txt',
+    },
+    {
+      file1: 'file1.yml', file2: 'file2.yml', formatter: 'stylish', expected: 'yml_stylish_test.txt',
+    },
+    {
+      file1: 'file1.yaml', file2: 'file2.yaml', formatter: 'stylish', expected: 'yaml_stylish_test.txt',
+    },
+    {
+      file1: 'file1.json', file2: 'file2.json', formatter: 'plain', expected: 'json_plain_test.txt',
+    },
+    {
+      file1: 'file1.yml', file2: 'file2.yml', formatter: 'plain', expected: 'yml_plain_test.txt',
+    },
+    {
+      file1: 'file1.yaml', file2: 'file2.yaml', formatter: 'plain', expected: 'yaml_plain_test.txt',
+    },
+  ];
 
-  const ymlStylishText = await readFile('yml_stylish_test.txt');
-  const diffYml = gendiff('./__fixtures__/file1.yml', './__fixtures__/file2.yml', 'stylish');
-  expect(diffYml).toEqual(ymlStylishText);
-
-  const yamlStylishText = await readFile('yaml_stylish_test.txt');
-  const diffYaml = gendiff('./__fixtures__/file1.yaml', './__fixtures__/file2.yaml', 'stylish');
-  expect(diffYaml).toEqual(yamlStylishText);
-
-  const jsonPlainText = await readFile('json_plain_test.txt');
-  const diffJson1 = gendiff('./__fixtures__/file1.json', './__fixtures__/file2.json', 'plain');
-  expect(diffJson1).toEqual(jsonPlainText);
-
-  const ymlPlainText = await readFile('yml_plain_test.txt');
-  const diffYml1 = gendiff('./__fixtures__/file1.yml', './__fixtures__/file2.yml', 'plain');
-  expect(diffYml1).toEqual(ymlPlainText);
-
-  const yamlPlainText = await readFile('yaml_plain_test.txt');
-  const diffYaml1 = gendiff('./__fixtures__/file1.yaml', './__fixtures__/file2.yaml', 'plain');
-  expect(diffYaml1).toEqual(yamlPlainText);
+  test.each(cases)(
+    'Differences between $file1 and $file2 at $formatter format',
+    ({
+      file1, file2, formatter, expected,
+    }) => {
+      const getfilePath1 = getFixturePath(file1);
+      const getfilePath2 = getFixturePath(file2);
+      const expectedResult = readFile(expected);
+      expect(gendiff(getfilePath1, getfilePath2, formatter)).toEqual(expectedResult);
+    },
+  );
 });
 
 test('getParsedData', () => {
@@ -62,15 +71,12 @@ test('makeLines', () => {
 });
 
 test('getFormat', () => {
-  const tree = [
-    {
-      key: 'follow',
-      value: false,
-      type: 'new',
-    },
+  const diff = [
+    { key: 'follow', value: false, type: 'deleted' },
+    { key: 'host', value: 'hexlet.io', type: 'unchanged' },
   ];
-  expect(() => { getFormat(tree, 'table'); }).toThrow();
-  expect(getFormat(tree, 'json')).toEqual(JSON.stringify(tree));
+  expect(getFormat(diff, 'json')).toEqual(JSON.stringify(diff));
+  expect(() => { getFormat(diff, 'table'); }).toThrow();
 });
 
 test('getPlain', () => {
