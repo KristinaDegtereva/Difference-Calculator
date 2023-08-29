@@ -9,9 +9,8 @@ const stringify = (value) => {
 
 const makeLines = (tree) => {
   const iter = (node, previousKey) => {
-    if (!_.isObject(node)) {
-      return `${node}`;
-    }
+    if (!_.isObject(node)) return `${node}`;
+
     const lines = node
       .filter((line) => line.type !== 'unchanged')
       .flatMap((line) => {
