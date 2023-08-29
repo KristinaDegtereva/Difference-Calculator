@@ -23,7 +23,7 @@ $ npm link
 ```
 ### Asciinema
 #### Background information about the utility
-[![asciicast](https://asciinema.org/a/Qlp1s9mcHWHuYX3rWFSrYEyap.svg)](https://asciinema.org/a/Qlp1s9mcHWHuYX3rWFSrYEyap)
+<a href="https://asciinema.org/a/Qlp1s9mcHWHuYX3rWFSrYEyap" target="_blank"><img src="https://asciinema.org/a/Qlp1s9mcHWHuYX3rWFSrYEyap.svg" /></a>
 
 #### Compare of two JSON and YAML files in format 'stylish' (default format)
 [![asciicast](https://asciinema.org/a/jHrXHViAecNkPR8oNBcr4Vv0v.svg)](https://asciinema.org/a/jHrXHViAecNkPR8oNBcr4Vv0v)
