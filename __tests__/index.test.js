@@ -2,10 +2,10 @@ import fs from 'fs';
 import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import gendiff from '../src/index.js';
-import getParsedData from '../src/parser.js';
-import makeLines from '../src/formatters/stylish.js';
-import getFormat from '../src/formatters/index.js';
-import getPlain from '../src/formatters/plain.js';
+// import getParsedData from '../src/parser.js';
+// import makeLines from '../src/formatters/stylish.js';
+// import getFormat from '../src/formatters/index.js';
+// import getPlain from '../src/formatters/plain.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
