@@ -4,7 +4,7 @@ const stringify = (value) => {
   if (_.isObject(value)) {
     return '[complex value]';
   }
-  // if (value === null) return null;
+  if (value === null) return null;
   return typeof value === 'string' ? `'${value}'` : String(value);
 };
 
@@ -17,20 +17,20 @@ const makeLines = (tree) => {
         const property = previousKey ? `${previousKey}.${line.key}` : line.key;
         switch (line.type) {
           case 'added':
-            return `Property '${property}' was added with value: ${stringify(line.value)}`;
+            return `Property '${property}' was added with value: ${stringify(line.value)}\n`;
           case 'deleted':
-            return `Property '${property}' was removed`;
+            return `Property '${property}' was removed\n`;
           case 'unchanged':
-            return [];
+            return null;
           case 'changed':
-            return `Property '${property}' was updated. From ${stringify(line.value)} to ${stringify(line.oldValue)}`;
+            return `Property '${property}' was updated. From ${stringify(line.value)} to ${stringify(line.oldValue)}\n`;
           case 'nested':
-            return `${iter(line.children, property)}`;
+            return `${iter(line.children, property)}\n`;
           default:
             throw new Error('Unknown type');
         }
       });
-    return [...lines].join('\n');
+    return [...lines].join('').replace(/\n$/, '');
   };
   return iter(tree, 0);
 };

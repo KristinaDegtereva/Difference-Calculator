@@ -2,10 +2,10 @@ import fs from 'fs';
 import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import gendiff from '../src/index.js';
-// import getParsedData from '../src/parser.js';
-// import makeLines from '../src/formatters/stylish.js';
-// import getFormat from '../src/formatters/index.js';
-// import getPlain from '../src/formatters/plain.js';
+import getParsedData from '../src/parser.js';
+import makeStylish from '../src/formatters/stylish.js';
+import getFormat from '../src/formatters/index.js';
+import getPlain from '../src/formatters/plain.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -43,51 +43,17 @@ describe('gendiff', () => {
       const getfilePath1 = getFixturePath(file1);
       const getfilePath2 = getFixturePath(file2);
       const expectedResult = readFile(expected);
+
+      const formatter1 = 'table';
+      const tree = [{ type: 'new' }];
+
       expect(gendiff(getfilePath1, getfilePath2, formatter)).toEqual(expectedResult);
+      expect(() => { getParsedData(gendiff(getfilePath1, getfilePath2, formatter)); }).toThrow();
+      expect(() => { getFormat(gendiff(getfilePath1, getfilePath2, formatter1)); }).toThrow();
+      expect(() => { getPlain(tree); }).toThrow();
+
+      expect(makeStylish(1)).toEqual(`{\n  ${'-1'}\n}`);
+      expect(() => { makeStylish(tree); }).toThrow();
     },
   );
 });
-
-// test('getParsedData', () => {
-//   expect(() => { getParsedData('data', '.yamsl'); }).toThrow();
-// });
-
-// test('makeLines', () => {
-//   expect(makeLines('text')).toEqual(`{\n  ${'-text'}\n}`);
-//   const tree = [
-//     {
-//       key: 'common',
-//       children: [
-//         {
-//           key: 'follow',
-//           value: false,
-//           type: 'new',
-//         },
-//       ],
-//       type: 'nested',
-//     },
-//   ];
-//   expect(() => { makeLines(tree); }).toThrow();
-// });
-
-// test('getFormat', () => {
-//   const diff = [
-//     { key: 'follow', value: false, type: 'deleted' },
-//     { key: 'host', value: 'hexlet.io', type: 'unchanged' },
-//   ];
-//   expect(getFormat(diff, 'json')).toEqual(JSON.stringify(diff));
-//   expect(() => { getFormat(diff, 'table'); }).toThrow();
-// });
-
-// test('getPlain', () => {
-//   expect(getPlain('text')).toEqual('text');
-
-//   const tree = [
-//     {
-//       key: 'follow',
-//       value: false,
-//       type: 'new',
-//     },
-//   ];
-//   expect(() => { getPlain(tree, 'table'); }).toThrow();
-// });
