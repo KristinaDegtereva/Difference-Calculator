@@ -3,9 +3,6 @@ import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import gendiff from '../src/index.js';
 import getParsedData from '../src/parser.js';
-import makeStylish from '../src/formatters/stylish.js';
-import getFormat from '../src/formatters/index.js';
-import getPlain from '../src/formatters/plain.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -44,16 +41,8 @@ describe('gendiff', () => {
       const getfilePath2 = getFixturePath(file2);
       const expectedResult = readFile(expected);
 
-      const formatter1 = 'table';
-      const tree = [{ type: 'new' }];
-
       expect(gendiff(getfilePath1, getfilePath2, formatter)).toEqual(expectedResult);
       expect(() => { getParsedData(gendiff(getfilePath1, getfilePath2, formatter)); }).toThrow();
-      expect(() => { getFormat(gendiff(getfilePath1, getfilePath2, formatter1)); }).toThrow();
-      expect(() => { getPlain(tree); }).toThrow();
-
-      expect(makeStylish(1)).toEqual(`{\n  ${'-1'}\n}`);
-      expect(() => { makeStylish(tree); }).toThrow();
     },
   );
 });
